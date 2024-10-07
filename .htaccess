@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force non-www redirect to www (fixes conflicting rule)
+    RewriteCond %{HTTP_HOST} ^verbalixtechnologies.com [NC]
+    RewriteRule ^(.*)$ https://www.verbalixtechnologies.com/$1 [L,R=301]
+
+    # Redirect index.php to root
+    RewriteCond %{THE_REQUEST} /index\.php [NC]
+    RewriteRule ^(.*)index\.php$ /$1 [L,R=301]
+
+    # Redirect all traffic to the public folder
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
